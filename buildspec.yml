@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - ls -la **
+      - echo $api_key_tmdb
+      - envsubst '${apiKey} ${authDomain} ${databaseURL} ${projectId} ${messagingSenderId} ${appId}' <src/Firebase/firebase.utils-default.js> src/Firebase/firebase.utils.js
+      - envsubst '${api_key_tmdb}' <src/Config/config-default.js> src/Config/config.js
+      - yarn install && yarn build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'build'
